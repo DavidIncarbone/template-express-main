@@ -10,6 +10,7 @@ const errorsHandler = require("./middlewares/errorsHandles");
 const notFound = require("./middlewares/notFound");
 const corsPolicy = require("./middlewares/corsPolicy");
 const examplesRouter = require("./routes/examples");
+const gamesRouter = require("./routes/games.js");
 
 app.use(express.static("public"));
 
@@ -21,6 +22,7 @@ app.get("/", (req, res) => {
 
 //other routes
 app.use("/examples", examplesRouter);
+app.use("/games", gamesRouter);
 
 app.use(errorsHandler);
 
