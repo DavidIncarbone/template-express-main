@@ -12,6 +12,7 @@ const corsPolicy = require("./middlewares/corsPolicy");
 const examplesRouter = require("./routes/examples");
 const gamesRouter = require("./routes/games.js");
 
+app.use(express.json());
 app.use(express.static("public"));
 
 app.use(corsPolicy);
@@ -30,5 +31,5 @@ app.use(notFound);
 
 //server must listen on your host and your port
 app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}}`);
+  console.log(`Server is running on http://localhost:${port}`);
 });

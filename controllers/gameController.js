@@ -19,21 +19,26 @@ function show(req, res) {
 }
 
 function store(req, res) {
-    let newId = 0;
-    for (let i = 0; i < games.length; i++) {
-        if (games[i]._id > newId) {
-            newId = games[i]._id;
-        }
-    }
-    newId += 1;
+    const newId = games.reduce((curr, next) => {
+        return curr._id < next._id ? next : curr
+    })._id + 1;
 
     // new data is in req.body
     const newItem = {
         _id: newId,
         title: req.body.title,
+        isbn: req.body.isbn,
+        pageCount: req.body.pageCount,
+        thumbnailUrl: req.body.thumbnailUrl,
+        shortDescription: req.body.shortDescription,
+        longDescription: req.body.longDescription,
+        status: req.body.status,
+        authors: req.body.authors,
+        categories: req.body.categories,
     };
 
-    examples.push(newItem);
+    games.push(newItem);
+    console.log(newItem);
     res.status(201).json(newItem);
 }
 
@@ -65,4 +70,10 @@ function destroy(req, res) {
     }
 }
 
-module.exports = { index, show, store, update, destroy };
+module.exports = {
+    index,
+    show,
+    store,
+    update,
+    destroy,
+};
